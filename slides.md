@@ -1,645 +1,180 @@
 ---
-# try also 'default' to start simple
-theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides, markdown enabled
-title: Welcome to Slidev
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply any unocss classes to the current slide
-class: text-center
-# https://sli.dev/custom/highlighters.html
-highlighter: shiki
-# https://sli.dev/guide/drawing
-drawings:
-  persist: false
-# slide transition: https://sli.dev/guide/animations#slide-transitions
-transition: slide-left
-# enable MDC Syntax: https://sli.dev/guide/syntax#mdc-syntax
-mdc: true
+layout: cover
 ---
 
-# Welcome to Slidev
+# 自主學習報告
 
-Presentation slides for developers
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
----
-transition: fade-out
----
-
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
----
-transition: slide-up
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-## Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc v-click minDepth="1" maxDepth="2"></Toc>
-
----
-layout: image-right
-image: https://cover.sli.dev
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover![^1]
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn More](https://sli.dev/guide/animations#click-animations)
-
-</div>
-
----
-
-# Motions
-
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <carbon:arrow-up />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/multiple-entries.md
-hide: false
----
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
+<!-- 嗨，我是 108 的 ...，今天，我要來講報告的自主學習主題是 [next]《何謂人工智慧》 -->
 
 ---
 layout: center
-class: text-center
 ---
 
-# Learn More
+# 何謂人工智慧
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+<!-- 相信各位都有聽過非常多有關「人工智慧」的介紹，像是這一篇 [next] 在放在 AWS 官網上的介紹 -->
+
+---
+layout: image
+image: https://i.ibb.co/XWkB803/Xnapper-2024-06-03-10-29-09.png
+---
+
+<!-- 在這篇介紹裡面，你可以看到他寫出了「人工智慧技術是如何發展的？」、「人工智慧有哪些優勢？」、「人工智慧有哪些實際應用？」這一些介紹更多都是聚集在「人工智慧能做什麼」而不是「人工智慧是什麼」，幾乎沒有提到真正能夠幫助入門人工智慧的東西，所以在今天的這份報告裡面，我想要來淺談人工智慧真正的運作原理，還有解釋一些基本的名詞，那就讓我們直接進入正題 -->
+
+---
+layout: two-cols
+---
+
+In the **modern** world, **technology** has become an **integral** part of our daily lives. **Innovations** in **communication** and **automation** have **transformed** the way we **live** and **work**. From **smartphones** to **artificial** intelligence, these **advancements** continue <br>to **shape** our **future**.
+
+::right::
+
+**modern** (adj.) - 現代的
+**technology** (n.) - 科技
+**integral** (adj.) - 不可或缺的
+**innovations** (n.) - 創新
+**communication** (n.) - 通訊
+**automation** (n.) - 自動化
+**transformed** (v.) - 轉變
+**live** (v.) - 生活
+**work** (v.) - 工作
+**smartphones** (n.) - 智能手機
+**artificial** (adj.) - 人工的
+**advancements** (n.) - 進步
+**shape** (v.) - 形塑
+**future** (n.) - 未來
+
+<!-- 在知道「機器是怎麼學習」之前，我們不妨回過頭來想想我們當初是怎麼學會一門語言的，拿英語來舉例子好了我們當初在學英語的時候，應該都有像這樣的一個單字表，我們可以一個一個死記硬背，來記住詞與意思之間的對應關係，再依照我們現有的的知識來推導出新的，我們沒見過的用法比如說我們知道 `shape` 是形塑，`future` 是未來，而當我們在見到 `shape our future` 這種更高階的、沒有見過的用法的時候，我們就能夠自然而然的推導出這是「塑造我們的未來」的意思 [next] -->
+
+---
+layout: center
+---
+
+# 監督式學習
+
+*Supervised learning*
+
+監督式學習是一種機器學習方法，通過使用標記數據來訓練模型。標記數據包括輸入和相應的正確輸出，模型學習從輸入預測輸出的規則。常見應用包括圖像分類、語音識別和自然語言處理。訓練過程中，模型會調整參數以最小化預測錯誤。優點是能提供準確的預測結果，缺點是需要大量標記數據，標記成本高。監督式學習在解決特定任務中表現優異，是許多人工智慧應用的核心技術。
+
+<!-- 那這種在知道數據與答案的明確對應關係的情況下進行的學習，就是我們在機器學習領域中的「監督式學習」 -->
+
+---
+layout: image
+image: https://i.ibb.co/yq5rz6F/classroom-many-students.png
+---
+
+<!-- 但在我們剛出生的時候，我們不知道任何詞彙與意思之間的對應關係，我們又是怎麼學習起中文的呢？ -->
+
+---
+layout: image
+image: https://i.ibb.co/fqCY9tH/genshin-launch.png
+---
+
+<!-- 通常在這種時候，我們就會開始識別「模式」，像是我們會發現到「原神，啟動！」通常都會在一個人打開「原神」之後出現，當這種情況在我們面前出現一定次數之後，我們就會知道「原神啟動」是指原神啟動的意思。 -->
+
+---
+layout: center
+---
+
+# 非監督式學習
+
+*Unsupervised Learning*
+
+非監督式學習是一種機器學習方法，使用未標記數據來訓練模型。與監督式學習不同，非監督式學習不依賴於輸入和輸出的匹配對，而是尋找數據內部的結構和模式。常見應用包括聚類分析和降維技術，如K-均值聚類和主成分分析。這些方法可以幫助識別數據中的異常、分組或簡化數據結構。優點是無需大量標記數據，適用於探索性數據分析，缺點是難以評估模型性能，結果解釋也可能比較困難。
+
+<!-- 那在這種透過自己識別「模式」來學習的方式，就叫做所謂的 []「非監督式學習」 -->
+
+---
+layout: two-cols-header
+---
+
+# 機器學習
+
+::left::
+
+<h2>監督式學習</h2>
+<h2 v-click>半監督式學習</h2>
+
+::right::
+
+<h2>無監督式學習</h2>
+<h2 v-after>自監督式學習</h2>
+
+<!-- 這些概念共同構建了我們現在機器學習的根本，幾乎所有的人工智慧都是在這樣的框架之下被訓練而成的我們現在知道了機器是怎麼學習的，那現在很火的各種「模型」又是什麼？這我們得說回我們在國中時學到的 [next]「函數」 -->
+
+---
+layout: center
+---
+
+# 函數
+
+在變數 $x$ 與 $y$ 的對應關係中，給定一個 $x$ 的值，$y$ 就有一個值且只有這個值會與 $x$ 值對應。這種對應的關係，稱為 $y$ 是 $x$ 的函數，記為 $y=f(x)$。其中 $x$ 稱為自變數，$y$ 稱為應變數。 在函數 $y=f(x)$ 的關係中，自變數 $x$ 的範圍稱為定義域，而應變數 $y$ 的範圍稱為值域。
+
+<!-- 這是函數的介紹我知道你看不懂，我也看不懂，所以我們來講人話 -->
+
+---
+layout: center
+---
+
+# $x$ => $f()$ => $y$
+
+| $x$  | $y$   |
+|------|-------|
+| $-3$ | $-6$  |
+| $-2$ | $-4$  |
+| $-1$ | $-2$  |
+| $0$  | $0$   |
+| $1$  | $2$   |
+| $2$  | $4$   |
+| $3$  | $6$   |
+
+<!-- 一個函數更像是一台「機器」，我們會給他任意的輸入，而他會產出對應的輸出而同樣的輸入永遠只會得到同樣的輸出，沒有例外 -->
+
+---
+layout: center
+---
+
+<img src="https://i.ibb.co/xFXx53k/Xnapper-2024-06-03-10-58-55.png"/>
+
+<!-- 我們可以把一個機器學習模型想像成是一個巨大的黑盒子函數，他裡面幹什麼，我們不知道、也不管，我們只管他能夠針對我們的輸入給出正確的輸出而機器在「學習」的過程，就是一步步構建這個巨大的函數，讓他對於我們輸入的結果能逐漸趨近於我們所想要的輸出 -->
+---
+layout: center
+---
+
+<img src="https://i.ibb.co/sP372Lx/Xnapper-2024-06-03-11-05-23.png"/>
+
+<v-click><img src="https://i.ibb.co/jgG1Cy3/Xnapper-2024-06-03-11-06-45.png"/></v-click>
+
+<!-- 舉例來說，我們想要一個模型來辨識一個物品是人還是狗，我們希望他看到人的時候，他可以說出這是人
+但如果他看到一個人的時候，說這是狗，那他就不是我們想要的結果
+那我們要怎麼讓一個模型從什麼都不知道，訓練成能夠在看到人的時候輸出人，看到狗的時候輸出狗的狀態呢？ -->
+
+---
+layout: center
+---
+
+# 暫停
+
+<!-- 然後呃...在這邊停下來似乎有點突兀，這份報告原本後面應該會有神經元、感知機、損失函數、超參數的這些基本名詞的介紹
+但製作因為時間不夠，我沒辦法把這個簡報全部呈現出來，
+如果我記得的話，我會把這個簡報的後續寫成一份 Blog 放到我的 GitHub 上，連結在此 [next]-->
+
+---
+layout: center
+---
+
+<center>
+  <img src="https://i.ibb.co/gSht3bz/Xnapper-2024-06-03-11-34-30.png"/>
+  <a>https://github.com/Nat1anWasTaken</a>
+</center>
+
+---
+layout: end
+---
+
+# 報告結束
+這個簡報是透過 Slidev 由代碼製作的，原碼：<a href="https://github.com/Nat1anWasTaken/self-learning-presentation">GitHub</a>
+
+<center><RepositoryQRcode/></center>
+
+<!-- 報告結束，謝謝大家 -->
